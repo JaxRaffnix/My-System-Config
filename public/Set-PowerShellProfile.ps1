@@ -20,6 +20,6 @@ function Set-PowerShellProfile {
     }
     
     Copy-Item -Path $ConfigFile -Destination $DestinationFile -Force
-    Write-Host "PowerShell profile restored successfully!" -ForegroundColor Green
+    Write-Host "PowerShell profile configured successfully!" -ForegroundColor Green
 }
 

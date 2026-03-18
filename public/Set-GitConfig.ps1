@@ -11,7 +11,7 @@ function Set-GitConfig {
     Test-Dependency -Command "git" -Source "Git.git" -App
 
     try {
-        git config --global --add include.path "$ConfigFile"
+        gsudo Copy-Item $ConfigFile "$HOME\.gitconfig" -Force
     }
     catch {
         Write-Error "Failed to set Git config: $_"

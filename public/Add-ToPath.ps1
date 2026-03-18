@@ -63,7 +63,8 @@ function Add-ToPath {
 
     if ($UpdatedPath -ne $CurrentPath) {
         [Environment]::SetEnvironmentVariable("Path", $UpdatedPath, "User")
-        Write-Host "User PATH updated successfully. Restart terminal to apply changes." -ForegroundColor Green
+        Restart-Explorer -Force
+        Write-Host "User PATH updated successfully." -ForegroundColor Green
     }
     else {
         Write-Host "User PATH is already up to date." -ForegroundColor Yellow
