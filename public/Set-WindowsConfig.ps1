@@ -39,6 +39,9 @@ Activates Windows Developer Mode, allowing the installation of unsigned apps and
 .PARAMETER DisableEdgeTabsInAltTabView
 Disables the display of Microsoft Edge tabs in the Alt+Tab view.
 
+.PARAMETER DisableStickyKeys
+Disables Sticky Keys accessibility feature.
+
 .EXAMPLE
 Set-WindowsConfig -All
 Configures all available settings.
@@ -64,7 +67,8 @@ This function requires administrative privileges with the 'gsudo' tool for certa
         [switch]$DisableTelemetry,
         [switch]$DisableMouseAcceleration,
         [switch]$DisableExplorerGallery,
-        [switch]$DisablePowerShellLogo
+        [switch]$DisablePowerShellLogo,
+        [switch]$DisableStickyKeys
     )
 
     # All feature switch names except -All and common parameters
@@ -257,6 +261,16 @@ This function requires administrative privileges with the 'gsudo' tool for certa
             Write-Host "PowerShell logo disabled successfully."
         } catch {
             Write-Error "Failed to disable PowerShell logo: $_"
+        }
+    }
+
+    if ($DisableStickyKeys) {
+        try {
+            Set-ItemProperty -Path "HKCU:\Control Panel\Accessibility\StickyKeys" -Name "Flags" -Value 506 -Force
+
+            Write-Host "Sticky Keys disabled successfully."
+        } catch {
+            Write-Error "Failed to disable Sticky Keys: $_"
         }
     }
 
